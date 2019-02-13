@@ -32,6 +32,15 @@ void Rational::reduce() {
 	setDenominator(denominator / gcd_result);
 }
 
+bool Rational::isZero() {
+	if (numerator == 0 || denominator == 0)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 Rational::Rational(int numerator, int denominator) {
 	setNumerator(numerator);
 	setDenominator(denominator);
@@ -71,5 +80,94 @@ int Rational::getDenominator() {
 string Rational::toString()
 {
 	reduce();
+	if (isZero())
+	{
+		return "0";
+	}
+
 	return std::to_string(numerator) + "/" + std::to_string(denominator);
+}
+
+// Rational operator which returns if the first Rational smaller than second Rational
+bool Rational::operator <(const Rational& rhs) {
+	double rational1 = numerator * 1.0 / denominator * 1.0;
+	double rational2 = rhs.numerator * 1.0 / rhs.denominator * 1.0;
+    return rational1 < rational2;
+}
+
+// Rational operator which returns if the first Rational smaller than second Rational or equal
+bool Rational::operator <=(const Rational& rhs) {
+    double rational1 = numerator * 1.0 / denominator * 1.0;
+	double rational2 = rhs.numerator * 1.0 / rhs.denominator * 1.0;
+    return rational1 <= rational2;
+}
+
+// Rational operator which returns if the first Rational bigger than second Rational
+bool Rational::operator >(const Rational& rhs) {
+    double rational1 = numerator * 1.0 / denominator * 1.0;
+	double rational2 = rhs.numerator * 1.0 / rhs.denominator * 1.0;
+    return rational1 > rational2;
+}
+
+// Rational operator which returns if the first Rational bigger than second Rational or equal
+bool Rational::operator >=(const Rational& rhs) {
+    double rational1 = numerator * 1.0 / denominator * 1.0;
+	double rational2 = rhs.numerator * 1.0 / rhs.denominator * 1.0;
+    return rational1 >= rational2;
+}
+
+// Rational operator which return true if two Rationals not equal
+bool Rational::operator !=(const Rational& rhs) {
+    double rational1 = numerator * 1.0 / denominator * 1.0;
+	double rational2 = rhs.numerator * 1.0 / rhs.denominator * 1.0;
+    return rational1 != rational2;
+}
+
+// Rational operator which return true if two Rationals equal
+bool Rational::operator ==(const Rational& rhs) {
+    return numerator == rhs.numerator && denominator == rhs.denominator;
+}
+
+// Operator to add two Rationals
+Rational& Rational::operator +(const Rational& rhs) {
+    int new_denominator = denominator * rhs.denominator;
+    int new_numerator = numerator * rhs.denominator;
+    int new_numerator2 = rhs.numerator * denominator;
+    new_numerator += new_numerator2;
+
+    Rational rational(new_numerator, new_denominator);
+
+    return rational;
+}
+
+// Operator to add subtract Rationals
+Rational& Rational::operator -(const Rational& rhs) {
+    int new_denominator = denominator * rhs.denominator;
+    int new_numerator = numerator * rhs.denominator;
+    int new_numerator2 = rhs.numerator * denominator;
+    new_numerator -= new_numerator2;
+
+    Rational rational(new_numerator, new_denominator);
+
+    return rational;
+}
+
+// Operator to add divide Rationals
+Rational& Rational::operator /(const Rational& rhs) {
+    int new_numerator = numerator * rhs.denominator;
+    int new_denominator = denominator * rhs.numerator;
+
+    Rational rational(new_numerator, new_denominator);
+
+    return rational;
+}
+
+// Operator to add multiply Rationals
+Rational& Rational::operator *(const Rational& rhs) {
+    int new_numerator = numerator * rhs.numerator;
+    int new_denominator = denominator * rhs.denominator;
+
+    Rational rational(new_numerator, new_denominator);
+
+    return rational;
 }

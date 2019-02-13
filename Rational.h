@@ -10,6 +10,7 @@ private:
 
 	int gcd(int, int);
 	void reduce();
+	bool isZero();
 public:
 	void setNumerator(int);
 	void setDenominator(int);
@@ -20,4 +21,16 @@ public:
 	std::string toString();
 
 	Rational(int numerator = 1, int denominator = 1);
+
+	bool operator <(const Rational&);
+	bool operator <=(const Rational&);
+	bool operator >(const Rational&);
+	bool operator >=(const Rational&);
+	bool operator !=(const Rational&);
+	bool operator ==(const Rational&);
+
+	Rational& operator +(const Rational&);
+	Rational& operator -(const Rational&);
+	Rational& operator *(const Rational&);
+	Rational& operator /(const Rational&);
 };

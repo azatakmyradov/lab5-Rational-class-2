@@ -4,6 +4,11 @@
 using std::cout;
 using std::cin;
 
+std::ostream& operator <<(std::ostream& out, Rational& r) {
+    out << r.toString();
+    return out;
+}
+
 int main() {
 	// create variables
 	int numerator1, denominator1, numerator2, denominator2;
@@ -25,9 +30,7 @@ int main() {
 	Rational rational1(numerator1, denominator1);
 	Rational rational2(numerator2, denominator2);
 
-	// display rationals
-	cout << rational1.toString() << std::endl;
-	cout << rational2.toString() << std::endl;
+	cout << rational1 * rational2;
 
 	return 0;
 }
