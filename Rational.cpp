@@ -44,6 +44,7 @@ bool Rational::isZero() {
 Rational::Rational(int numerator, int denominator) {
 	setNumerator(numerator);
 	setDenominator(denominator);
+	reduce();
 }
 
 /*
@@ -64,6 +65,11 @@ void Rational::setDenominator(int number) {
 	Gets and returns the numerator
 */
 int Rational::getNumerator() {
+	reduce();
+	if (isZero()) {
+		numerator = 0;
+		denominator = 0;
+	}
 	return numerator;
 }
 
@@ -71,6 +77,11 @@ int Rational::getNumerator() {
 	Gets and returns the denominator
 */
 int Rational::getDenominator() {
+	reduce();
+	if (isZero()) {
+		numerator = 0;
+		denominator = 0;
+	}
 	return denominator;
 }
 
